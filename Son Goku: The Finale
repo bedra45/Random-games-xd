@@ -1,0 +1,73 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Son Goku: The Finale", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Transformations",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Unlock SSJG (it kicks but rejoin)",
+	Callback = function()
+      		game.ReplicatedStorage.Form:InvokeServer("SSJG","Short")
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Unlock SSJB (first unlock SSJG)",
+	Callback = function()
+      		game.ReplicatedStorage.Form:InvokeServer("SSJB","Short")
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Ultra Instinct Omen (works in chaos world)",
+	Callback = function()
+      		game.ReplicatedStorage.Form:InvokeServer("UIO","Long")
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Dragon balls",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab2:AddButton({
+	Name = "Spawn Shenron",
+	Callback = function()
+    local function Collect()
+for i,v in pairs(workspace.Assets['Dragon Balls']:GetDescendants()) do
+    if v:IsA("ProximityPrompt") then
+    fireproximityprompt(v,1000)
+    end
+end
+end
+
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 1'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 2'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 3'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 4'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 5'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 6'].Star.CFrame)
+wait(0.5)
+Collect()
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 7'].Star.CFrame)
+wait(0.5)
+Collect()
+wait(1)
+game.Players:Chat("Shenron get the hell out from there")
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(workspace.Assets['Dragon Balls']['dragon ball 1'].Star.CFrame)
+  	end    
+})
