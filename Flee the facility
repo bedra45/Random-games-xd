@@ -1,0 +1,326 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Flee the facility Internal", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Beast",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Enable Crawl",
+	Callback = function()
+      		game:GetService("Players").LocalPlayer.TempPlayerStatsModule.DisableCrawl.Value = false
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Disable Music,RedGlow",
+	Callback = function()
+  game.Players.LocalPlayer.Character.Gemstone.Handle:Destroy()
+  for i,v in pairs(game.Players.LocalPlayer.Character.Hammer.Handle:GetChildren()) do
+      if v:IsA("Sound") then
+          v:Destroy()
+      end
+  end
+	end
+})
+
+Tab:AddButton({
+	Name = "Auto Tie",
+	Callback = function()
+while wait() do
+    if game:GetService("Players").LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+local Players = game:GetService("Players")
+local lp = Players.LocalPlayer
+
+local function GetClosestPlayer()
+   local target = nil
+   local distance = math.huge
+ 
+   for i,v in next, Players:GetPlayers() do
+       if v and v ~= lp and v.Character and v.Character:FindFirstChildOfClass('Humanoid') and v.Character:FindFirstChildOfClass('Humanoid').RootPart then
+           local plrdist = lp:DistanceFromCharacter(v.Character:FindFirstChildOfClass('Humanoid').RootPart.CFrame.p)
+           if plrdist < distance then
+               target = v
+               distance = plrdist
+           end
+       end
+   end
+ 
+   return target
+end
+
+print(GetClosestPlayer().Name)
+local args = {
+    [1] = "HammerTieUp",
+    [2] = GetClosestPlayer().Character.Torso,
+    [3] = GetClosestPlayer().Character.HumanoidRootPart.Position
+}
+
+game:GetService("Players").LocalPlayer.Character.Hammer.HammerEvent:FireServer(unpack(args))
+end
+end
+	end
+})
+
+Tab:AddButton({
+	Name = "Make game stuck",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+  	end    
+})
+
+
+local Tab1 = Window:MakeTab({
+	Name = "NonBeast",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab1:AddButton({
+	Name = "Never fail hacking",
+	Callback = function()
+spawn(function()
+while wait() do
+game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult",true)
+end
+end)
+  	end    
+})
+
+
+Tab1:AddButton({
+	Name = "ESP",
+	Callback = function()
+for i,v in pairs(game.Players:GetChildren()) do
+    if v.Name ~= game.Players.LocalPlayer.Name then
+    local e = Instance.new("Highlight",v.Character.Torso)
+    local e = Instance.new("Highlight",v.Character.Head)
+    local e = Instance.new("Highlight",v.Character["Left Arm"])
+    local e = Instance.new("Highlight",v.Character["Left Leg"])
+    local e = Instance.new("Highlight",v.Character["Right Leg"])
+    local e = Instance.new("Highlight",v.Character["Right Arm"])
+end
+end
+end
+})
+
+
+Tab1:AddButton({
+	Name = "Computer ESP",
+	Callback = function()
+      		local player = game.Players.LocalPlayer.Character
+local Urfuckingname = game.Players.LocalPlayer.Name
+
+
+for i,v in pairs(game.Workspace:GetDescendants()) do
+if v.Name == "ComputerTable" then
+local ESP = Instance.new("Highlight",v.Screen)
+ESP.FillTransparency = 0
+end
+end
+  	end    
+})
+
+Tab1:AddButton({
+	Name = "FreezePod ESP",
+	Callback = function()
+              local player = game.Players.LocalPlayer.Character
+local Urfuckingname = game.Players.LocalPlayer.Name
+
+
+for i,v in pairs(game.Workspace:GetDescendants()) do
+if v.Name == "FreezePod" then
+local ESP = Instance.new("Highlight",v.Part)
+ESP.FillTransparency = 0
+end
+end
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Rare Bundles",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab2:AddButton({
+	Name = "LuckOTheIrishBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 166845664
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "AnniversaryClassicBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 307455363
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "DarkBonesBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 410815333
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "RedNutcrackerBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 437772965
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "2ndAnniversaryBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 592709755
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "GravePumpkinBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 841410438
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "ToySantaBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 944208057
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "SpookySweetsBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1111394671
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "SantaChimneyBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1132314949
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "PhantomLightBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1217789147
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "SantaBootBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1230544927
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "PartyBalloonsBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1333174803
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "DoomthrustBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1333174881
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "DevilishFlameBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1333174979
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "DarkMansionBundle",
+	Callback = function()
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.LocalScript.Enabled = true
+game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.ShopMenuWindow.Body.SideBarTabsFrame.BuyBundleButton2.Visible = true
+
+local hi = require(game:GetService("ReplicatedStorage").DeveloperProductIds);
+
+hi["RedNutcrackerBundle"] = 1333175072
+  	end    
+})
