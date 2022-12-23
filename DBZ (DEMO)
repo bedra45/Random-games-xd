@@ -1,0 +1,126 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "DBZ (DEMO)", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Transformations",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan 1",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan 2",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan 2",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan 3",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan 3",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan God",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan God",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan Blue",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan Blue",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan Rose",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan Rose",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Legendary Super Saiyan",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Legendary Super Saiyan",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan 4",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan 4",false)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Super Saiyan Rage",
+	Callback = function()
+game:GetService("ReplicatedStorage").RemoteEvents.UpdateAppearance:FireServer("Super Saiyan Rage",false)
+  	end    
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab2:AddButton({
+	Name = "KillAura (hold t)",
+	Callback = function()
+local delay = 0
+local keybind = "t"
+
+Toggle = false
+
+spawn(function()
+    while true do
+if Toggle == true then
+    for i,v in pairs(workspace.Main.Live:GetChildren()) do
+    if v:IsA("Model") and v.Name ~= game.Players.LocalPlayer.Name then
+        pcall(function()
+                if v.HumanoidRootPart and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude < 50 then
+                    
+game:GetService("ReplicatedStorage").Events.TryAttack:FireServer({["Victim"] = v,["Type"] = "Light",["LocalInfo"] = {["Flying"] = true},["CurrentHeavy"] = 1,["CurrentLight"] = 1,["CurrentLightCombo"] = 1,["VictimPosition"] = v.HumanoidRootPart.Position ,["AnimSet"] = "Vegito"})
+            
+        end
+        end)
+    end
+end
+end
+wait(delay)
+end
+end)
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.KeyDown:Connect(function(key)
+    if key == keybind then
+        Toggle = true
+    end
+end)
+mouse.KeyUp:Connect(function(key)
+    if key == keybind then
+        Toggle = false
+    end
+end)
+  	end    
+})
+
+Tab2:AddButton({
+	Name = "GodMode",
+	Callback = function()
+game.Players.LocalPlayer.Character.Data.MaxHealth:Destroy()
+game.Players.LocalPlayer.Character.Data.Stamina:Destroy()
+end
+})
