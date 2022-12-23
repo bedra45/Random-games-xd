@@ -1,0 +1,28 @@
+--this just gets armor im bored
+local rootpart = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+
+local Free = game:GetService("Workspace").Regen.Purchases.MVPurchases.Helmets["[Diamond Helmet]\010[FREE]"].SWHelmet
+
+local four = game:GetService("Workspace").Regen.Purchases.MVPurchases.Helmets["[Emerald Helmet]\010[4 Wins]"].SWHelmet
+
+local six = game:GetService("Workspace").Regen.Purchases.MVPurchases.Helmets["[Obsidian Helmet]\010[6 Wins]"].SWHelmet
+
+local two = game:GetService("Workspace").Regen.Purchases.MVPurchases.Helmets["[Ruby Helmet]\010[2 Wins]"].SWHelmet
+
+local freearmor = game:GetService("Workspace").Regen.Purchases.MVPurchases["Power Ups"]["[MEGA VIP Armor]\010[FREE]"].Button
+
+firetouchinterest(rootpart,freearmor,0)
+firetouchinterest(rootpart,freearmor,1)
+
+firetouchinterest(rootpart,six,0)
+firetouchinterest(rootpart,six,1)
+wait(0.1)
+firetouchinterest(rootpart,four,0)
+firetouchinterest(rootpart,four,1)
+wait(0.1)
+firetouchinterest(rootpart,two,0)
+firetouchinterest(rootpart,two,1)
+wait(0.1)
+firetouchinterest(rootpart,Free,0)
+firetouchinterest(rootpart,Free,1)
