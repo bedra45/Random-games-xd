@@ -1,0 +1,37 @@
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Crashing....",
+	Text = "Loading Tools",
+	Icon = ""
+})
+
+for i = 1,300 do
+fireclickdetector(game:GetService("Workspace").CupGiver.GivePart.ClickDetector,math.huge)
+game.RunService.Stepped:wait()
+end
+
+wait(1)
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+        v.Parent = game.Players.LocalPlayer.Character
+    end
+end
+
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "Crashing....",
+	Text = "Wait until disconnect",
+	Icon = ""
+})
+wait(1)
+
+local player = game.Players.LocalPlayer.Character
+game.Players.LocalPlayer.Character = nil
+game.Players.LocalPlayer.Character = player
+wait(game.Players.RespawnTime + 0.5)
+
+player.HumanoidRootPart:Destroy()
+for i,v in pairs(player:GetChildren()) do
+    if v:IsA("MeshPart") or v:IsA("Part") or v:IsA("BasePart") and v.Name ~= "Head" then
+        v:Destroy()
+    end
+end
+player.Head:Destroy()
