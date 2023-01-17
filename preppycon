@@ -1,12 +1,11 @@
 game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Crashing....",
-	Text = "Loading Tools",
-	Icon = ""
+    Title = "Crashing....",
+    Text = "Loading Tools",
+    Icon = ""
 })
 
 for i = 1,300 do
 fireclickdetector(game:GetService("Workspace").CupGiver.GivePart.ClickDetector,math.huge)
-game.RunService.Stepped:wait()
 end
 
 wait(1)
@@ -17,9 +16,9 @@ for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 end
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "Crashing....",
-	Text = "Wait until disconnect",
-	Icon = ""
+    Title = "Crashing....",
+    Text = "Wait until disconnect",
+    Icon = ""
 })
 wait(1)
 
