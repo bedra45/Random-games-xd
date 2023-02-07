@@ -464,7 +464,7 @@ end)
 }
 
 local Tab4 = GUI:Tab{
-	Name = "Tps & Trolls",
+	Name = "Tp to pcs",
 	Icon = "rbxassetid://8569322835"
 }
 
