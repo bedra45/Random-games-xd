@@ -893,7 +893,7 @@ end
 }
 
 local MyDropdown = Tab5:Dropdown{
-	Name = "Buy unavailable bundles",
+	Name = "Buy unavailable bundles (go to shop to buy it)",
 	StartingText = "Select...",
 	Description = nil,
 	Items = {
