@@ -3,7 +3,7 @@
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
 local GUI = Mercury:Create{
-    Name = "Final flee the facility Internal",
+    Name = "flee the facility Internal v1.1",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
     Link = "Best Flee the facility GUI"
@@ -11,9 +11,114 @@ local GUI = Mercury:Create{
 
 GUI:Notification{
 	Title = "Update:",
-	Text = "Added Loop to check if pc is hacked ,Fixed lag on ESP ,Add on discord for suggestions discord: bedra#0191",
+	Text = "Added Player Stuff WalkSpeed JumpPower Noclip FixCam, Fixed Lag on ESP and on others ,Add on discord for suggestions discord: bedra#0191",
 	Duration = 5,
 	Callback = function() end
+}
+
+local Tab6 = GUI:Tab{
+	Name = "Player Stuff",
+	Icon = "rbxassetid://8569322835"
+}
+
+Tab6:Button{
+	Name = "Respawn",
+	Description = nil,
+	Callback = function()
+	    pcall(function()
+	local plr = game.Players.LocalPlayer
+	local char = plr.Character
+	if char:FindFirstChildOfClass("Humanoid") then char:FindFirstChildOfClass("Humanoid"):ChangeState(15) end
+	char:ClearAllChildren()
+	local newChar = Instance.new("Model")
+	newChar.Parent = workspace
+	plr.Character = newChar
+	wait()
+	plr.Character = char
+	newChar:Destroy()
+	end)
+	    end
+}
+
+Tab6:Button{
+	Name = "FixCam",
+	Description = nil,
+	Callback = function()
+local player = game.Players.LocalPlayer
+
+	workspace.CurrentCamera.CameraSubject = player.Character:FindFirstChildWhichIsA('Humanoid')
+	workspace.CurrentCamera.CameraType = "Custom"
+	player.CameraMinZoomDistance = 0.5
+	player.CameraMaxZoomDistance = math.huge
+	player.CameraMode = "Classic"
+	player.Character.Head.Anchored = false
+	    end
+}
+
+Tab6:Slider{
+	Name = "WalkSpeed",
+	Default = 50,
+	Min = 0,
+	Max = 100,
+	Callback = function(value)
+	    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+	    end
+}
+
+Tab6:Slider{
+	Name = "JumpPower",
+	Default = 50,
+	Min = 0,
+	Max = 100,
+	Callback = function(value)
+	    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+	    end
+}
+
+Tab6:Toggle{
+	Name = "Noclip (Must Bypass Anti Cheat)",
+	StartingState = false,
+	Description = nil,
+	Callback = function(state)
+if state == true then
+_G.NoclipLoop = game.RunService.Stepped:Connect(function()
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") or v:IsA("Part") or v:IsA("MeshPart") then
+            v.CanCollide = false
+        end
+    end
+end)
+else
+_G.NoclipLoop:Disconnect()
+end
+end
+}
+
+Tab6:Toggle{
+	Name = "HitBox",
+	StartingState = false,
+	Description = nil,
+	Callback = function(state)
+if state == true then
+for i,v in pairs(game.Players:GetChildren()) do
+if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(6.5,6.5,6.5)
+v.Character.HumanoidRootPart.Transparency = 0.8
+end)
+end
+end
+else
+for i,v in pairs(game.Players:GetChildren()) do
+if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
+v.Character.HumanoidRootPart.Transparency = 1
+end)
+end
+end
+end
+	    end
 }
 
 local Tab = GUI:Tab{
@@ -31,7 +136,7 @@ if state == true then
 		if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
 			pcall(function()
 				local transparency = 0.5
-				local Folder = Instance.new("Folder",game.CoreGui)
+				local Folder = Instance.new("Folder",v.Character)
 				Folder.Name = v.Name .. "'s ESP"
 				--Head
 				local Head = Instance.new("BoxHandleAdornment",Folder)
@@ -82,6 +187,7 @@ if state == true then
 				LeftLeg.Transparency = transparency
 				LeftLeg.Size = v.Character["Left Leg"].Size
 				--Colors if beast or not
+				_G.LoopBeastColor = game.RunService.Stepped:Connect(function()
 				if v.TempPlayerStatsModule.IsBeast.Value == true then
 					Head.Color3 = Color3.fromRGB(205, 98, 152)
 					Torso.Color3 = Color3.fromRGB(205, 98, 152)
@@ -97,6 +203,7 @@ if state == true then
 					RightLeg.Color3 = Color3.new(1,1,1)
 					LeftLeg.Color3 = Color3.new(1,1,1)
 				end
+				end)
         --[[
         --BillboardGui
         local BillboardGui = Instance.new("BillboardGui",Folder)
@@ -122,13 +229,19 @@ if state == true then
 		end
 	end
 else
-	for i,v in pairs(game.CoreGui:GetChildren()) do
-		if v:IsA("Folder") then
-			pcall(function()
-				v:Destroy()
-			end)
-		end
-	end
+_G.LoopBeastColor:Disconnect()
+for i,v in pairs(game.Players:GetChildren()) do
+    if v:IsA("Player") then
+   for i,e in pairs(v.Character:GetChildren()) do
+   if e:IsA("Folder") then
+       pcall(function()
+       e:Destroy()
+       end)
+end
+end
+end
+end
+
 end
 end
 }
@@ -139,7 +252,7 @@ Tab:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-local StopIt = false
+_G.DoorESP = false
 	spawn(function()
 		--single doors
 		for i,v in pairs(workspace:GetDescendants()) do
@@ -164,8 +277,7 @@ local StopIt = false
 								v.Door.Highlight.FillColor = Color3.new(1,0,0)
 							end
 						end)
-						if StopIt == true then
-                            print("it stopped?")
+						if _G.DoorESP == true then
 						    break;
 						end
 						wait(0.1)
@@ -201,7 +313,7 @@ local StopIt = false
 								v.Highlight.FillColor = Color3.new(1,0,0)
 							end
 						end)
-                        if StopIt == true then
+                        if _G.DoorESP == true then
                              print("Stopped itLop!2")
                              break;
                         end
@@ -212,7 +324,7 @@ local StopIt = false
 		end
 	end)
 else
-StopIt = true
+_G.DoorESP = true
 	--signle door
 	for i,v in pairs(workspace:GetDescendants()) do
 		if v.Name == "SingleDoor" then
@@ -242,7 +354,7 @@ Tab:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-local StopComputerESP = false
+_G.StopComputerESP = false
 for i,v in pairs(workspace:GetDescendants()) do 
     if v.Name == "ComputerTable" then
         pcall(function()
@@ -264,7 +376,7 @@ for i,v in pairs(workspace:GetDescendants()) do
           v.Highlight.FillColor = Color3.new(0,1,0)
             end)
         end
-        if StopComputerESP == true then
+        if _G.StopComputerESP == true then
           print("Stopped itLop!PC")
           break;
         end
@@ -274,7 +386,7 @@ wait(1)
 end
 end)
 else
-StopComputerESP = true
+_G.StopComputerESP = true
 for i,v in pairs(workspace:GetDescendants()) do 
     if v.Name == "ComputerTable" then
         pcall(function()
@@ -321,6 +433,7 @@ Tab2:Button{
 	Name = "Inf Stamina",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 game.UserInputService.InputBegan:Connect(function(key)
 if key.KeyCode == Enum.KeyCode.Q then
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 30
@@ -336,6 +449,14 @@ end)
 pcall(function()
 game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()    
 end)
+else
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast >:((",
+	Duration = 5,
+	Callback = function() end
+}
+end
 	    end
 }
 
@@ -343,9 +464,18 @@ Tab2:Button{
 	Name = "No Slow",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 pcall(function()
 game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()
 end)
+else
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast >:((",
+	Duration = 5,
+	Callback = function() end
+}
+end
 	end
 }
 
@@ -353,7 +483,16 @@ Tab2:Button{
 	Name = "Enable Crawl",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 game:GetService("Players").LocalPlayer.TempPlayerStatsModule.DisableCrawl.Value = false
+else
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast >:((",
+	Duration = 5,
+	Callback = function() end
+}
+end
 	end
 }
 
@@ -361,6 +500,7 @@ Tab2:Button{
 	Name = "Remove Sounds and Glow",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 for i,v in pairs(game.Players.LocalPlayer.Character.Hammer.Handle:GetChildren()) do
     if v:IsA("Sound") then
         pcall(function()
@@ -372,6 +512,14 @@ end
 pcall(function()
 game.Players.LocalPlayer.Character.Gemstone.Handle.PointLight:Destroy()
 end)
+else
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast >:((",
+	Duration = 5,
+	Callback = function() end
+}
+end
 end
 }
 
@@ -379,37 +527,17 @@ Tab2:Button{
 	Name = "Bug Game Forever",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 game.Players.LocalPlayer.Character:Destroy()
-	end
-}
-
-
-
-Tab2:Toggle{
-	Name = "HitBox",
-	StartingState = false,
-	Description = nil,
-	Callback = function(state)
-if state == true then
-for i,v in pairs(game.Players:GetChildren()) do
-if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(6.5,6.5,6.5)
-v.Character.HumanoidRootPart.Transparency = 0.8
-end)
-end
-end
 else
-for i,v in pairs(game.Players:GetChildren()) do
-if v:IsA("Player") and v.Name ~= game.Players.LocalPlayer.Name then
-pcall(function()
-v.Character.HumanoidRootPart.Size = Vector3.new(2,2,1)
-v.Character.HumanoidRootPart.Transparency = 1
-end)
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast >:((",
+	Duration = 5,
+	Callback = function() end
+}
 end
-end
-end
-	    end
+	end
 }
 
 Tab2:Toggle{
@@ -418,7 +546,8 @@ Tab2:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-local StopTheShit = false
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+_G.StopTheShit = false
 while wait() do
 if game:GetService("Players").LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 local Players = game:GetService("Players")
@@ -450,12 +579,20 @@ local args = {
 
 game:GetService("Players").LocalPlayer.Character.Hammer.HammerEvent:FireServer(unpack(args))
 end
-if StopTheShit == true then
+if _G.StopTheShit == true then
     break;
 end
 end
 else
-StopTheShit = true
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not the beast>:(",
+	Duration = 3,
+	Callback = function() end
+}
+end
+else
+_G.StopTheShit = true
 end
 	    end
 }
@@ -508,6 +645,14 @@ Tab4:Button{
 	Name = "Bypass Anti Cheat (dont if beast)",
 	Description = nil,
 	Callback = function()
+if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your the beast dont bypass anti cheat if ur the beast>:((",
+	Duration = 3,
+	Callback = function() end
+}
+else
 local character = game.Players.LocalPlayer.Character
     local torso = character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
     local root = character:FindFirstChild("HumanoidRootPart")
@@ -521,6 +666,7 @@ local character = game.Players.LocalPlayer.Character
     torso.Transparency = 1
     getgenv().Torsoo = torso
     character.Parent = workspace
+    end
 	    end
 }
 
@@ -638,16 +784,7 @@ return
 end
 }
 
-
-
-local Tab5 = GUI:Tab{
-	Name = "Misc",
-	Icon = "rbxassetid://8569322835"
-}
-
-
-
-Tab5:Button{
+Tab4:Button{
 	Name = "Visible and Invisible (Must bypass anti cheat Keybind: f)",
 	Description = nil,
 	Callback = function()
@@ -895,6 +1032,12 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	end
 end)
 	    end
+}
+
+
+local Tab5 = GUI:Tab{
+	Name = "Misc",
+	Icon = "rbxassetid://8569322835"
 }
 
 Tab5:Button{
