@@ -14,6 +14,13 @@ GUI:Notification{
 	Callback = function() end
 }
 
+GUI:Credit{
+	Name = "bedra#0191",
+	Description = "Made by",
+	V3rm = "bedra45",
+	Discord = "bedra#0191"
+}
+
 local Tab6 = GUI:Tab{
 	Name = "Player Stuff",
 	Icon = "rbxassetid://8569322835"
