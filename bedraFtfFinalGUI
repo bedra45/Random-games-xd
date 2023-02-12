@@ -1,5 +1,3 @@
---fuck this im releasing it source idc anymore
-
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
 local GUI = Mercury:Create{
@@ -81,7 +79,7 @@ Tab6:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-_G.NoclipLoop = game.RunService.Stepped:Connect(function()
+getgenv().NoclipLoop = game.RunService.Stepped:Connect(function()
     for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
         if v:IsA("BasePart") or v:IsA("Part") or v:IsA("MeshPart") then
             v.CanCollide = false
@@ -89,7 +87,7 @@ _G.NoclipLoop = game.RunService.Stepped:Connect(function()
     end
 end)
 else
-_G.NoclipLoop:Disconnect()
+getgenv().NoclipLoop:Disconnect()
 end
 end
 }
@@ -187,7 +185,7 @@ if state == true then
 				LeftLeg.Transparency = transparency
 				LeftLeg.Size = v.Character["Left Leg"].Size
 				--Colors if beast or not
-				_G.LoopBeastColor = game.RunService.Stepped:Connect(function()
+				getgenv().LoopBeastColor = game.RunService.Stepped:Connect(function()
 				if v.TempPlayerStatsModule.IsBeast.Value == true then
 					Head.Color3 = Color3.fromRGB(205, 98, 152)
 					Torso.Color3 = Color3.fromRGB(205, 98, 152)
@@ -229,7 +227,7 @@ if state == true then
 		end
 	end
 else
-_G.LoopBeastColor:Disconnect()
+getgenv().LoopBeastColor:Disconnect()
 for i,v in pairs(game.Players:GetChildren()) do
     if v:IsA("Player") then
    for i,e in pairs(v.Character:GetChildren()) do
@@ -252,7 +250,7 @@ Tab:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-_G.DoorESP = false
+getgenv().DoorESP = false
 	spawn(function()
 		--single doors
 		for i,v in pairs(workspace:GetDescendants()) do
@@ -277,7 +275,7 @@ _G.DoorESP = false
 								v.Door.Highlight.FillColor = Color3.new(1,0,0)
 							end
 						end)
-						if _G.DoorESP == true then
+						if getgenv().DoorESP == true then
 						    break;
 						end
 						wait(0.1)
@@ -313,7 +311,7 @@ _G.DoorESP = false
 								v.Highlight.FillColor = Color3.new(1,0,0)
 							end
 						end)
-                        if _G.DoorESP == true then
+                        if getgenv().DoorESP == true then
                              print("Stopped itLop!2")
                              break;
                         end
@@ -324,7 +322,7 @@ _G.DoorESP = false
 		end
 	end)
 else
-_G.DoorESP = true
+getgenv().DoorESP = true
 	--signle door
 	for i,v in pairs(workspace:GetDescendants()) do
 		if v.Name == "SingleDoor" then
@@ -354,7 +352,7 @@ Tab:Toggle{
 	Description = nil,
 	Callback = function(state)
 if state == true then
-_G.StopComputerESP = false
+getgenv().StopComputerESP = false
 for i,v in pairs(workspace:GetDescendants()) do 
     if v.Name == "ComputerTable" then
         pcall(function()
@@ -376,7 +374,7 @@ for i,v in pairs(workspace:GetDescendants()) do
           v.Highlight.FillColor = Color3.new(0,1,0)
             end)
         end
-        if _G.StopComputerESP == true then
+        if getgenv().StopComputerESP == true then
           print("Stopped itLop!PC")
           break;
         end
@@ -386,7 +384,7 @@ wait(1)
 end
 end)
 else
-_G.StopComputerESP = true
+getgenv().StopComputerESP = true
 for i,v in pairs(workspace:GetDescendants()) do 
     if v.Name == "ComputerTable" then
         pcall(function()
@@ -547,7 +545,7 @@ Tab2:Toggle{
 	Callback = function(state)
 if state == true then
 if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
-_G.StopTheShit = false
+getgenv().StopTheShit = false
 while wait() do
 if game:GetService("Players").LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
 local Players = game:GetService("Players")
@@ -579,7 +577,7 @@ local args = {
 
 game:GetService("Players").LocalPlayer.Character.Hammer.HammerEvent:FireServer(unpack(args))
 end
-if _G.StopTheShit == true then
+if getgenv().StopTheShit == true then
     break;
 end
 end
@@ -592,7 +590,7 @@ GUI:Notification{
 }
 end
 else
-_G.StopTheShit = true
+getgenv().StopTheShit = true
 end
 	    end
 }
@@ -788,7 +786,7 @@ Tab4:Button{
 	Name = "Visible and Invisible (Must bypass anti cheat Keybind: f)",
 	Description = nil,
 	Callback = function()
-local Global = getgenv and getgenv() or _G
+local Global = getgenv and getgenv()
 local First = true
 local Restart = true
 local SoundService = game:GetService("SoundService")
