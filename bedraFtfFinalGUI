@@ -1,5 +1,3 @@
---fuck this im releasing it source idc anymore
-
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
 local GUI = Mercury:Create{
@@ -1044,6 +1042,7 @@ Tab5:Button{
 	Name = "Close trade GUI",
 	Description = nil,
 	Callback = function()
+if game.PlaceId == 1738581510 then
 	    game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.TradingMenuWindow.Visible = false
 
 GUI:Notification{
@@ -1052,6 +1051,14 @@ GUI:Notification{
 	Duration = 5,
 	Callback = function() end
 }
+else
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Your not in the trading server Join it!! >:(",
+	Duration = 3,
+	Callback = function() end
+}
+end
 	    end
 }
 
