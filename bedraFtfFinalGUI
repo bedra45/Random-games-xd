@@ -1,3 +1,5 @@
+--fuck this im releasing it source idc anymore
+
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
 local GUI = Mercury:Create{
@@ -1036,6 +1038,21 @@ end)
 local Tab5 = GUI:Tab{
 	Name = "Misc",
 	Icon = "rbxassetid://8569322835"
+}
+
+Tab5:Button{
+	Name = "Close trade GUI",
+	Description = nil,
+	Callback = function()
+	    game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.TradingMenuWindow.Visible = false
+
+GUI:Notification{
+	Title = "Alert!",
+	Text = "Visual scam wont work if u close the gui while doing the visual scam.",
+	Duration = 5,
+	Callback = function() end
+}
+	    end
 }
 
 Tab5:Button{
