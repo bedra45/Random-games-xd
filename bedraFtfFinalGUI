@@ -9,7 +9,7 @@ local GUI = Mercury:Create{
 
 GUI:Notification{
 	Title = "Update:",
-	Text = "Add on discord for suggestions discord: bedra#03812",
+	Text = "Add on discord for suggestions discord: bedra#3812",
 	Duration = 5,
 	Callback = function() end
 }
