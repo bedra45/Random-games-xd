@@ -1064,7 +1064,7 @@ Tab5:Button{
 	Description = nil,
 	Callback = function()
 if game.PlaceId == 1738581510 then
-firesignal(game:GetService("Players").LocalPLayer.PlayerGui.MenusScreenGui.TradingMenuWindow.Body.OfferFrame.AcceptButton.MouseButton1Click)
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.TradingMenuWindow.Body.OfferFrame.AcceptButton.MouseButton1Click)
 wait(3)
 game:GetService("Players").LocalPlayer.PlayerGui.MenusScreenGui.TradingMenuWindow.Visible = true
 else
