@@ -1,7 +1,7 @@
 local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
 local GUI = Mercury:Create{
-    Name = "flee the facility Internal v1.1",
+    Name = "flee the facility Internal v1.1 (soon anothor update)",
     Size = UDim2.fromOffset(600, 400),
     Theme = Mercury.Themes.Dark,
     Link = "Best Flee the facility GUI"
@@ -9,7 +9,7 @@ local GUI = Mercury:Create{
 
 GUI:Notification{
 	Title = "Update:",
-	Text = "Added Player Stuff WalkSpeed JumpPower Noclip FixCam, Fixed Lag on ESP and on others ,Add on discord for suggestions discord: bedra#0191",
+	Text = "Add on discord for suggestions discord: bedra#03812",
 	Duration = 5,
 	Callback = function() end
 }
