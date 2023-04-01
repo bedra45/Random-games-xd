@@ -15,10 +15,10 @@ GUI:Notification{
 }
 
 GUI:Credit{
-	Name = "bedra#0191",
+	Name = "bedra#3812",
 	Description = "Made by",
 	V3rm = "bedra45",
-	Discord = "bedra#0191"
+	Discord = "bedra#3812"
 }
 
 local Tab6 = GUI:Tab{
