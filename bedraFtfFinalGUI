@@ -1078,6 +1078,18 @@ end
 	    end
 }
 
+Tab5:Textbox{
+	Name = "Send trade",
+	Callback = function(text)
+local args = {
+    [1] = "SendTradeRequest",
+    [2] = game.Players[text].UserId
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):FireServer(unpack(args))
+     end
+}
+
 Tab5:Button{
 	Name = "Inf Credits (Only works on Bundles)",
 	Description = nil,
